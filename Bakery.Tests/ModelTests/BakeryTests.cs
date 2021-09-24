@@ -7,7 +7,7 @@ namespace Bakery.Tests
   public class BreadTests
   {
     [TestMethod]
-    public void BreadConstructor_ReturnsCount_Bread()
+    public void BreadConstructor_ReturnsCount_Int()
     {
       Bread newBread = new Bread(2);
       Assert.AreEqual(2, newBread.Count);
@@ -39,7 +39,7 @@ namespace Bakery.Tests
   public class PastryTests
   {
     [TestMethod]
-    public void PastryGetter_ReturnsCount_Pastry()
+    public void PastryGetter_ReturnsCount_Int()
     {
       Pastry newPastry = new Pastry(2);
       Assert.AreEqual(2, newPastry.Count);
@@ -51,6 +51,19 @@ namespace Bakery.Tests
       Pastry newPastry = new Pastry(2);
       newPastry.Count -= 1;
       Assert.AreEqual(1, newPastry.Count);
+    }
+
+    [TestMethod]
+    public void Cost_ReturnsPriceOfPastryOrder_Int()
+    {
+      Pastry order1 = new Pastry(1);
+      Pastry order2 = new Pastry(2);
+      Pastry order3 = new Pastry(3);
+      Pastry order4 = new Pastry(4);
+      Assert.AreEqual(2, order1.Cost());
+      Assert.AreEqual(4, order2.Cost());
+      Assert.AreEqual(5, order3.Cost());
+      Assert.AreEqual(7, order4.Cost());
     }
   }
 }
