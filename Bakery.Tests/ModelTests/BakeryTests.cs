@@ -1,15 +1,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Template.Models;
+using Bakery.Models;
 using System;
 
-namespace Template.Tests
+namespace Bakery.Tests
 {
   [TestClass]
-  public class Template
+  public class Bread
   {
     [TestMethod]
-    public void Template_SaysHelloWorld_String()
+    public void Bread_CreatesBreadObject_Bread()
     {
       // Arrange
       string hello = "hello";
