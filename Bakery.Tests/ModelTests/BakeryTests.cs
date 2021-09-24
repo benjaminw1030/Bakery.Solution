@@ -66,17 +66,18 @@ namespace Bakery.Tests
       Assert.AreEqual(2, newPastry.Roll);
     }
 
-    // [TestMethod]
-    // public void Cost_ReturnsPriceOfPastryOrder_Int()
-    // {
-    //   Pastry order1 = new Pastry(1);
-    //   Pastry order2 = new Pastry(2);
-    //   Pastry order3 = new Pastry(3);
-    //   Pastry order4 = new Pastry(4);
-    //   Assert.AreEqual(2, order1.Cost());
-    //   Assert.AreEqual(4, order2.Cost());
-    //   Assert.AreEqual(5, order3.Cost());
-    //   Assert.AreEqual(7, order4.Cost());
-    // }
+    [TestMethod]
+    public void Cost_ReturnsPriceOfPastryOrder_Int()
+    {
+      Pastry order1 = new Pastry(1, 0, 0);
+      Pastry order2 = new Pastry(0, 3, 0);
+      Pastry order3 = new Pastry(0, 0, 2);
+      double crossiantPrice = 2;
+      double tartPrice = 3;
+      double rollPrice = 4;
+      Assert.AreEqual(2, order1.Cost(order1.Crossiant, crossiantPrice));
+      Assert.AreEqual(7.5, order2.Cost(order2.Tart, tartPrice));
+      Assert.AreEqual(8, order3.Cost(order3.Roll, rollPrice));
+    }
   }
 }
