@@ -6,6 +6,7 @@ namespace Bakery
 {
   public class Program
   {
+
     public static void Main()
     {
       Bread breadOrder = new Bread(0);
@@ -14,9 +15,10 @@ namespace Bakery
       Console.WriteLine("----------------------------");
       Console.WriteLine("");
       Console.WriteLine("Delicious baked goods for low, low prices!");
+      MainMenu(breadOrder, pastryOrder);
     }
 
-    public static void MainMenu()
+    public static void MainMenu(Bread breadOrder, Pastry pastryOrder)
     {
       Console.WriteLine("");
       Console.WriteLine("We have the following specials this week:");
@@ -32,36 +34,36 @@ namespace Bakery
       string menuSelect = Console.ReadLine();
       if (menuSelect == "1")
       {
-        BreadMenu();
+        BreadMenu(breadOrder, pastryOrder);
       }
       else if (menuSelect == "2")
       {
-        PastryMenu();
+        PastryMenu(breadOrder, pastryOrder);
       }
       else if (menuSelect == "3")
       {
-        Checkout();
+        Checkout(breadOrder, pastryOrder);
       }
       else if (menuSelect == "4")
       {
-        Quit();
+        Quit(breadOrder, pastryOrder);
       }
       else
       {
         Console.WriteLine("");
-        Console.WriteLine("Please enter a number from 1-4.")
-        MainMenu();
+        Console.WriteLine("Please enter a number from 1-4.");
+        MainMenu(breadOrder, pastryOrder);
       }
     }
 
-    public static void BreadMenu()
+    public static void BreadMenu(Bread breadOrder, Pastry pastryOrder)
     {
       Console.WriteLine("");
       Console.WriteLine("How many loaves would you like to order?");
-      string breadCount = Console.ReadLine();
-      int breadCount = int.Parse(breadCount);
+      string breadCountString = Console.ReadLine();
+      int breadCount = int.Parse(breadCountString);
       breadOrder.Count = breadCount;
-      if (breadOrder.Count % 3 == 1)
+      if (breadOrder.Count % 3 == 2)
       {
         Console.WriteLine("");
         Console.WriteLine("Would you like another one? It's free! (Y to accept)");
@@ -71,25 +73,29 @@ namespace Bakery
           breadOrder.Count++;
           Console.WriteLine("");
           Console.WriteLine("Will do!");
-          MainMenu();
+          MainMenu(breadOrder, pastryOrder);
         }
         else
         {
           Console.WriteLine("");
           Console.WriteLine("Alrighty then!");
-          MainMenu();
+          MainMenu(breadOrder, pastryOrder);
         }
+      }
+      else
+      {
+        MainMenu(breadOrder, pastryOrder);
       }
     }
 
-    public static void PastryMenu()
+    public static void PastryMenu(Bread breadOrder, Pastry pastryOrder)
     {
       Console.WriteLine("");
       Console.WriteLine("How many pastries would you like to order?");
-      string pastryCount = Console.ReadLine();
-      int pastryCount = int.Parse(pastryCount);
+      string pastryCountString = Console.ReadLine();
+      int pastryCount = int.Parse(pastryCountString);
       pastryOrder.Count = pastryCount;
-      if (pastryOrder.Count % 3 == 1)
+      if (pastryOrder.Count % 3 == 2)
       {
         Console.WriteLine("");
         Console.WriteLine("Would you like another one for just $1? (Y to accept)");
@@ -99,18 +105,22 @@ namespace Bakery
           pastryOrder.Count++;
           Console.WriteLine("");
           Console.WriteLine("Will do!");
-          MainMenu();
+          MainMenu(breadOrder, pastryOrder);
         }
         else
         {
           Console.WriteLine("");
           Console.WriteLine("Alrighty then!");
-          MainMenu();
+          MainMenu(breadOrder, pastryOrder);
         }
+      }
+        else
+      {
+        MainMenu(breadOrder, pastryOrder);
       }
     }
 
-    public static void Checkout()
+    public static void Checkout(Bread breadOrder, Pastry pastryOrder)
     {
       int breadPrice = breadOrder.Cost();
       int pastryPrice = pastryOrder.Cost();
@@ -130,22 +140,24 @@ namespace Bakery
         {
           Console.WriteLine("");
           Console.WriteLine("Thank you! Your order has been placed!");
-          MainMenu();
+          breadOrder.Count = 0;
+          pastryOrder.Count = 0;
+          MainMenu(breadOrder, pastryOrder);
         }
         else
         {
-          Quit();
+          Quit(breadOrder, pastryOrder);
         }
       }
       else
       {
       Console.WriteLine("");
       Console.WriteLine("You have not ordered anything yet.");
-      MainMenu();
+      MainMenu(breadOrder, pastryOrder);
       }
     }
 
-    Quit()
+    public static void Quit(Bread breadOrder, Pastry pastryOrder)
     {
       Console.WriteLine("");
       Console.WriteLine("Would you like to quit? (Y to accept)");
@@ -153,11 +165,11 @@ namespace Bakery
       if (response.ToLower() == "y")
       {
         Console.WriteLine("");
-        Console.WriteLine("Thank you and have a nice day!")
+        Console.WriteLine("Thank you and have a nice day!");
       }
       else
       {
-        MainMenu();
+        MainMenu(breadOrder, pastryOrder);
       }
     }
   }
