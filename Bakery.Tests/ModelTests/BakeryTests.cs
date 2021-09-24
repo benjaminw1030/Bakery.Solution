@@ -27,18 +27,19 @@ namespace Bakery.Tests
       Assert.AreEqual(4, newBread.Rye);
     }
 
-    // [TestMethod]
-    // public void Cost_ReturnsPriceOfBreadOrder_Int()
-    // {
-    //   Bread order1 = new Bread(1);
-    //   Bread order2 = new Bread(2);
-    //   Bread order3 = new Bread(3);
-    //   Bread order4 = new Bread(4);
-    //   Assert.AreEqual(5, order1.Cost());
-    //   Assert.AreEqual(10, order2.Cost());
-    //   Assert.AreEqual(10, order3.Cost());
-    //   Assert.AreEqual(15, order4.Cost());
-    // }
+    [TestMethod]
+    public void Cost_ReturnsPriceOfBreadOrder_Int()
+    {
+      Bread order1 = new Bread(1, 0, 0);
+      Bread order2 = new Bread(0, 3, 0);
+      Bread order3 = new Bread(0, 0, 2);
+      int wheatPrice = 5;
+      int sourPrice = 6;
+      int ryePrice = 7;
+      Assert.AreEqual(5, order1.Cost(order1.Wheat, wheatPrice));
+      Assert.AreEqual(12, order2.Cost(order2.Sour, sourPrice));
+      Assert.AreEqual(14, order3.Cost(order3.Rye, ryePrice));
+    }
   }
 
   [TestClass]
