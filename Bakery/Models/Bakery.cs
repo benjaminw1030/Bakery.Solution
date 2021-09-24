@@ -15,9 +15,9 @@ namespace Bakery.Models
       Rye = rye;
     }
 
-    public int Cost(int bread, int price)
+    public double Cost(int bread, double price)
     {
-      int cost = 0;
+      double cost = 0;
       for (int i = 1; i <= bread; i++)
       {
         if (i % 3 != 0)

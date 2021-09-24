@@ -177,9 +177,9 @@ namespace Bakery
     public static void Checkout(Bread breadOrder, Pastry pastryOrder)
     {
       Console.WriteLine(breadOrder.Wheat);
-      int wheatPrice = breadOrder.Cost(breadOrder.Wheat, 5);
-      int sourPrice = breadOrder.Cost(breadOrder.Sour, 6);
-      int ryePrice = breadOrder.Cost(breadOrder.Rye, 7);
+      double wheatPrice = breadOrder.Cost(breadOrder.Wheat, 5);
+      double sourPrice = breadOrder.Cost(breadOrder.Sour, 6);
+      double ryePrice = breadOrder.Cost(breadOrder.Rye, 7);
       double crossiantPrice = pastryOrder.Cost(pastryOrder.Crossiant, 2);
       double tartPrice = pastryOrder.Cost(pastryOrder.Tart, 3);
       double rollPrice = pastryOrder.Cost(pastryOrder.Roll, 4);
@@ -189,13 +189,32 @@ namespace Bakery
         Console.WriteLine("");
         Console.WriteLine("Thank you! Your order is:");
         Console.WriteLine("");
-        Console.WriteLine($"{breadOrder.Wheat} loaves of wheat bread for ${wheatPrice}");
-        Console.WriteLine($"{breadOrder.Sour} loaves of sourdough bread for ${sourPrice}");
-        Console.WriteLine($"{breadOrder.Rye} loaves of rye bread for ${ryePrice}");
-        Console.WriteLine($"{pastryOrder.Crossiant} crossiants for ${crossiantPrice}");
-        Console.WriteLine($"{pastryOrder.Tart} strawberry tarts for ${tartPrice}");
-        Console.WriteLine($"{pastryOrder.Roll} cinnamon rolls for ${rollPrice}");
-        Console.WriteLine($"For a total of ${totalPrice}.");
+        if (wheatPrice > 0)
+        {
+          Console.WriteLine($"Wheat bread loaf: {breadOrder.Wheat} for ${wheatPrice.ToString("0.00")}");
+        }
+        if (sourPrice > 0)
+        {
+          Console.WriteLine($"Sourdough bread loaf: {breadOrder.Sour} for ${sourPrice.ToString("0.00")}");
+        }
+        if (ryePrice > 0)
+        {
+          Console.WriteLine($"Rye bread loaf: {breadOrder.Rye} for ${ryePrice.ToString("0.00")}");
+        }
+        if (crossiantPrice > 0)
+        {
+          Console.WriteLine($"Crossiant: {pastryOrder.Crossiant} for ${crossiantPrice.ToString("0.00")}");
+        }
+        if (tartPrice > 0)
+        {
+          Console.WriteLine($"Strawberry tart: {pastryOrder.Tart} for ${tartPrice.ToString("0.00")}");
+        }
+        if (rollPrice > 0)
+        {
+          Console.WriteLine($"Cinnamon roll: {pastryOrder.Roll} for ${rollPrice.ToString("0.00")}");
+        }
+        Console.WriteLine("");
+        Console.WriteLine($"For a total of ${totalPrice.ToString("0.00")}.");
         Console.WriteLine("");
         Console.WriteLine("Does this look correct? (Y to accept)");
         string response = Console.ReadLine();

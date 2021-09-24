@@ -33,9 +33,9 @@ namespace Bakery.Tests
       Bread order1 = new Bread(1, 0, 0);
       Bread order2 = new Bread(0, 3, 0);
       Bread order3 = new Bread(0, 0, 2);
-      int wheatPrice = 5;
-      int sourPrice = 6;
-      int ryePrice = 7;
+      double wheatPrice = 5;
+      double sourPrice = 6;
+      double ryePrice = 7;
       Assert.AreEqual(5, order1.Cost(order1.Wheat, wheatPrice));
       Assert.AreEqual(12, order2.Cost(order2.Sour, sourPrice));
       Assert.AreEqual(14, order3.Cost(order3.Rye, ryePrice));
