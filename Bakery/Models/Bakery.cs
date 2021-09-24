@@ -4,21 +4,25 @@ namespace Bakery.Models
 {
   public class Bread
   {
-    public int Count { get; set; }
+    public int Wheat { get; set; }
+    public int Sour { get; set; }
+    public int Rye { get; set; }
 
-    public Bread(int count)
+    public Bread(int wheat, int sour, int rye)
     {
-      Count = count;
+      Sour = sour;
+      Wheat = wheat;
+      Rye = rye;
     }
 
-    public int Cost()
+    public int Cost(int bread, int price)
     {
       int cost = 0;
-      for (int i = 1; i <= this.Count; i++)
+      for (int i = 1; i <= bread; i++)
       {
         if (i % 3 != 0)
         {
-          cost += 5;
+          cost += price;
         }
         else
         {
@@ -31,25 +35,29 @@ namespace Bakery.Models
 
   public class Pastry
   {
-    public int Count { get; set; }
+    public int Crossiant { get; set; }
+    public int Tart { get; set; }
+    public int Roll { get; set; }
 
-    public Pastry(int count)
+    public Pastry(int crossiant, int tart, int roll)
     {
-      Count = count;
+      Crossiant = crossiant;
+      Tart = tart;
+      Roll = roll;
     }
 
-    public int Cost()
+    public double Cost(int pastry, double price)
     {
-      int cost = 0;
-      for (int i = 1; i <= this.Count; i++)
+      double cost = 0;
+      for (int i = 1; i <= pastry; i++)
       {
         if (i % 3 != 0)
         {
-          cost += 2;
+          cost += price;
         }
         else
         {
-          cost += 1;
+          cost += (price * .5);
         }
       }
       return cost;

@@ -9,8 +9,8 @@ namespace Bakery
 
     public static void Main()
     {
-      Bread breadOrder = new Bread(0);
-      Pastry pastryOrder = new Pastry(0);
+      Bread breadOrder = new Bread(0, 0, 0);
+      Pastry pastryOrder = new Pastry(0, 0, 0);
       Console.WriteLine("Welcome to Pierre's Bakery!");
       Console.WriteLine("----------------------------");
       Console.WriteLine("");
@@ -22,8 +22,8 @@ namespace Bakery
     {
       Console.WriteLine("");
       Console.WriteLine("We have the following specials this week:");
-      Console.WriteLine("Bread loaves for $5 (Buy two get one free!)");
-      Console.WriteLine("Pastries for $2 (3 for $5!)");
+      Console.WriteLine("Buy two loaves of bread and get one free!");
+      Console.WriteLine("Buy two pastries get one 1/2 off!");
       Console.WriteLine("");
       Console.WriteLine("Please enter the number of your selection:");
       Console.WriteLine("1) Order Bread");
@@ -57,81 +57,144 @@ namespace Bakery
     }
 
     public static void BreadMenu(Bread breadOrder, Pastry pastryOrder)
-    {
+    { 
       Console.WriteLine("");
-      Console.WriteLine("How many loaves would you like to order?");
-      string breadCountString = Console.ReadLine();
-      int breadCount = int.Parse(breadCountString);
-      breadOrder.Count = breadCount;
-      if (breadOrder.Count % 3 == 2)
+      Console.WriteLine("What kind of bread would you like to order?");
+      Console.WriteLine("1) Wheat - $5.00");
+      Console.WriteLine("2) Sourdough - $6.00");
+      Console.WriteLine("3) Our Famous Rye Bread - $7.00");
+      Console.WriteLine("4) Back to menu");
+      Console.WriteLine("");
+      string breadSelect = Console.ReadLine();
+      if (breadSelect == "4")
+      {
+        MainMenu(breadOrder, pastryOrder);
+      }
+      else if (breadSelect == "1" || breadSelect == "2" || breadSelect == "3")
       {
         Console.WriteLine("");
-        Console.WriteLine("Would you like another one? It's free! (Y to accept)");
-        string response = Console.ReadLine();
-        if (response.ToLower() == "y")
+        Console.WriteLine("How many loaves?");
+        string breadCountString = Console.ReadLine();
+        int breadCount = int.Parse(breadCountString);
+        if (breadCount % 3 == 2)
         {
-          breadOrder.Count++;
           Console.WriteLine("");
-          Console.WriteLine("Will do!");
-          MainMenu(breadOrder, pastryOrder);
+          Console.WriteLine("Would you like another one? It's free! (Y to accept)");
+          string response = Console.ReadLine();
+          if (response.ToLower() == "y")
+          {
+            breadCount++;
+            Console.WriteLine("");
+            Console.WriteLine("Will do!");
+          }
+          else
+          {
+            Console.WriteLine("");
+            Console.WriteLine("Alrighty then!");
+          }
         }
-        else
+        switch (breadSelect)
         {
-          Console.WriteLine("");
-          Console.WriteLine("Alrighty then!");
-          MainMenu(breadOrder, pastryOrder);
+          case "1":
+            breadOrder.Wheat = breadCount;
+            break;
+          case "2":
+            breadOrder.Sour = breadCount;
+            break;
+          case "3":
+            breadOrder.Rye = breadCount;
+            break;
         }
       }
       else
       {
-        MainMenu(breadOrder, pastryOrder);
-      }
+        Console.WriteLine("");
+        Console.WriteLine("Please make a selection.");
+        BreadMenu(breadOrder, pastryOrder);
+      }  
+      MainMenu(breadOrder, pastryOrder);
     }
 
     public static void PastryMenu(Bread breadOrder, Pastry pastryOrder)
     {
       Console.WriteLine("");
-      Console.WriteLine("How many pastries would you like to order?");
-      string pastryCountString = Console.ReadLine();
-      int pastryCount = int.Parse(pastryCountString);
-      pastryOrder.Count = pastryCount;
-      if (pastryOrder.Count % 3 == 2)
-      {
-        Console.WriteLine("");
-        Console.WriteLine("Would you like another one for just $1? (Y to accept)");
-        string response = Console.ReadLine();
-        if (response.ToLower() == "y")
-        {
-          pastryOrder.Count++;
-          Console.WriteLine("");
-          Console.WriteLine("Will do!");
-          MainMenu(breadOrder, pastryOrder);
-        }
-        else
-        {
-          Console.WriteLine("");
-          Console.WriteLine("Alrighty then!");
-          MainMenu(breadOrder, pastryOrder);
-        }
-      }
-        else
+      Console.WriteLine("What kind of Pastry would you like to order?");
+      Console.WriteLine("1) Crossiants - $2.00");
+      Console.WriteLine("2) Strawberry Tarts - $3.00");
+      Console.WriteLine("3) Extra-Large Cinnamon Rolls - $4.00");
+      Console.WriteLine("4) Back to menu");
+      Console.WriteLine("");
+      string pastrySelect = Console.ReadLine();
+      if (pastrySelect == "4")
       {
         MainMenu(breadOrder, pastryOrder);
       }
+      else if (pastrySelect == "1" || pastrySelect == "2" || pastrySelect == "3")
+      {
+        Console.WriteLine("");
+        Console.WriteLine("How many pastries would you like to order?");
+        string pastryCountString = Console.ReadLine();
+        int pastryCount = int.Parse(pastryCountString);
+        if (pastryCount % 3 == 2)
+        {
+          Console.WriteLine("");
+          Console.WriteLine("Would you like another one for 1/2 price? (Y to accept)");
+          string response = Console.ReadLine();
+          if (response.ToLower() == "y")
+          {
+            pastryCount++;
+            Console.WriteLine("");
+            Console.WriteLine("Will do!");
+          }
+          else
+          {
+            Console.WriteLine("");
+            Console.WriteLine("Alrighty then!");
+          }
+        }
+        switch (pastrySelect)
+        {
+          case "1":
+            pastryOrder.Crossiant = pastryCount;
+            break;
+          case "2":
+            pastryOrder.Tart = pastryCount;
+            break;
+          case "3":
+            pastryOrder.Roll = pastryCount;
+            break;
+        }
+      }
+      else
+      {
+        Console.WriteLine("");
+        Console.WriteLine("Please make a selection.");
+        PastryMenu(breadOrder, pastryOrder);
+      }
+      MainMenu(breadOrder, pastryOrder);
     }
 
     public static void Checkout(Bread breadOrder, Pastry pastryOrder)
     {
-      int breadPrice = breadOrder.Cost();
-      int pastryPrice = pastryOrder.Cost();
-      int totalPrice = breadPrice + pastryPrice;
+      Console.WriteLine(breadOrder.Wheat);
+      int wheatPrice = breadOrder.Cost(breadOrder.Wheat, 5);
+      int sourPrice = breadOrder.Cost(breadOrder.Sour, 6);
+      int ryePrice = breadOrder.Cost(breadOrder.Rye, 7);
+      double crossiantPrice = pastryOrder.Cost(pastryOrder.Crossiant, 2);
+      double tartPrice = pastryOrder.Cost(pastryOrder.Tart, 3);
+      double rollPrice = pastryOrder.Cost(pastryOrder.Roll, 4);
+      double totalPrice = wheatPrice + sourPrice + ryePrice + crossiantPrice + tartPrice + rollPrice;
       if (totalPrice > 0)
       {
         Console.WriteLine("");
         Console.WriteLine("Thank you! Your order is:");
         Console.WriteLine("");
-        Console.WriteLine($"{breadOrder.Count} loaves of bread for ${breadPrice}");
-        Console.WriteLine($"{pastryOrder.Count} pastries for ${pastryPrice}");
+        Console.WriteLine($"{breadOrder.Wheat} loaves of wheat bread for ${wheatPrice}");
+        Console.WriteLine($"{breadOrder.Sour} loaves of sourdough bread for ${sourPrice}");
+        Console.WriteLine($"{breadOrder.Rye} loaves of rye bread for ${ryePrice}");
+        Console.WriteLine($"{pastryOrder.Crossiant} crossiants for ${crossiantPrice}");
+        Console.WriteLine($"{pastryOrder.Tart} strawberry tarts for ${tartPrice}");
+        Console.WriteLine($"{pastryOrder.Roll} cinnamon rolls for ${rollPrice}");
         Console.WriteLine($"For a total of ${totalPrice}.");
         Console.WriteLine("");
         Console.WriteLine("Does this look correct? (Y to accept)");
@@ -140,9 +203,9 @@ namespace Bakery
         {
           Console.WriteLine("");
           Console.WriteLine("Thank you! Your order has been placed!");
-          breadOrder.Count = 0;
-          pastryOrder.Count = 0;
-          MainMenu(breadOrder, pastryOrder);
+          Bread newBreadOrder = new Bread(0, 0, 0);
+          Pastry newPastryOrder = new Pastry(0, 0, 0);
+          MainMenu(newBreadOrder, newPastryOrder);
         }
         else
         {
