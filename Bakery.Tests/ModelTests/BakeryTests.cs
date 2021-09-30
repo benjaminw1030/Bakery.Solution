@@ -19,12 +19,15 @@ namespace Bakery.Tests
     public void BreadSetter_AllowsChangeToCount_Int()
     {
       Bread newBread = new Bread(1, 2, 3);
-      newBread.Wheat += 1;
-      newBread.Sour += 1;
-      newBread.Rye += 1;
-      Assert.AreEqual(2, newBread.Wheat);
-      Assert.AreEqual(3, newBread.Sour);
-      Assert.AreEqual(4, newBread.Rye);
+      int newWheatCount = 2;
+      int newSourCount = 3;
+      int newRyeCount = 4;
+      newBread.Wheat = newWheatCount;
+      newBread.Sour = newSourCount;
+      newBread.Rye = newRyeCount;
+      Assert.AreEqual(newWheatCount, newBread.Wheat);
+      Assert.AreEqual(newSourCount, newBread.Sour);
+      Assert.AreEqual(newRyeCount, newBread.Rye);
     }
 
     [TestMethod]
@@ -58,12 +61,15 @@ namespace Bakery.Tests
     public void PastrySetter_AllowsChangeToCount_Int()
     {
       Pastry newPastry = new Pastry(1, 2, 3);
-      newPastry.Crossiant -= 1;
-      newPastry.Tart -= 1;
-      newPastry.Roll -= 1;
-      Assert.AreEqual(0, newPastry.Crossiant);
-      Assert.AreEqual(1, newPastry.Tart);
-      Assert.AreEqual(2, newPastry.Roll);
+      int newCrossiantCount = 2;
+      int newTartCount = 3;
+      int newRollCount = 4;
+      newPastry.Crossiant = newCrossiantCount;
+      newPastry.Tart = newTartCount;
+      newPastry.Roll = newRollCount;
+      Assert.AreEqual(newCrossiantCount, newPastry.Crossiant);
+      Assert.AreEqual(newTartCount, newPastry.Tart);
+      Assert.AreEqual(newRollCount, newPastry.Roll);
     }
 
     [TestMethod]

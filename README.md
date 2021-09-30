@@ -20,7 +20,9 @@ This program utilizes two C# classes to create an interface for a bakery. The us
 2. [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) this repository from GitHub to your local machine.
 3. Open the new directory.
 4. Open a new terminal instance in the Bakery.Solution/Bakery directory.
-5. Type "dotnet run" in the terminal.
+5. Type "dotnet build" in the terminal, then after completion type "dotnet run" to start the program.
+
+* To run model tests, navigate to Bakery.Solution/Bakery.Tests in the console and type "dotnet test".
 
 ## Known Bugs
 
